@@ -130,7 +130,9 @@ for f in "$DESKTOP_DIR/google-docs.desktop" "$DESKTOP_DIR/google-sheets.desktop"
     gio set -t string "$f" metadata::trusted "yes" 2>/dev/null || true
 done
 
-chown -R "$KID_USER:$KID_USER" "$DESKTOP_DIR"
+chown "$KID_USER:$KID_USER" \
+    "$DESKTOP_DIR/google-docs.desktop" \
+    "$DESKTOP_DIR/google-sheets.desktop"
 echo "  Google Docs:   /usr/share/applications + $KID_USER Desktop"
 echo "  Google Sheets: /usr/share/applications + $KID_USER Desktop"
 
