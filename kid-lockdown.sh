@@ -82,15 +82,17 @@ for app in "${HIDE[@]}"; do
 done
 chown -R "$KID_USER:$KID_USER" "$LOCAL_APPS"
 
-# ── Ensure Chromium is installed ─────────────────────────────────────────────
+# ── Ensure Google Chrome is installed ────────────────────────────────────────
+# chromium-browser is a snap stub on Linux Mint / Ubuntu 22.04+ — use Chrome .deb
 echo ""
-if ! command -v chromium-browser &>/dev/null; then
-    echo "Installing Chromium..."
-    apt-get update -qq
-    apt-get install -y chromium-browser
-    echo "  chromium-browser: installed"
+if ! command -v google-chrome-stable &>/dev/null; then
+    echo "Installing Google Chrome..."
+    wget -qO /tmp/google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    apt-get install -y /tmp/google-chrome.deb
+    rm -f /tmp/google-chrome.deb
+    echo "  google-chrome-stable: installed"
 else
-    echo "  chromium-browser: already installed"
+    echo "  google-chrome-stable: already installed"
 fi
 
 # ── Google Docs / Google Sheets app launchers ────────────────────────────────
@@ -100,8 +102,8 @@ echo "Creating Google Docs and Sheets launchers..."
 cat > /usr/share/applications/google-docs.desktop <<'EOF'
 [Desktop Entry]
 Name=Google Docs
-Exec=chromium-browser --app=https://docs.google.com/
-Icon=chromium-browser
+Exec=google-chrome-stable --app=https://docs.google.com/
+Icon=google-chrome
 Type=Application
 Categories=Office;WordProcessor;
 StartupNotify=true
@@ -110,8 +112,8 @@ EOF
 cat > /usr/share/applications/google-sheets.desktop <<'EOF'
 [Desktop Entry]
 Name=Google Sheets
-Exec=chromium-browser --app=https://sheets.google.com/
-Icon=chromium-browser
+Exec=google-chrome-stable --app=https://sheets.google.com/
+Icon=google-chrome
 Type=Application
 Categories=Office;Spreadsheet;
 StartupNotify=true
