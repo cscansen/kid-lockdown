@@ -102,7 +102,7 @@ echo "Creating Google Docs and Sheets launchers..."
 cat > /usr/share/applications/google-docs.desktop <<'EOF'
 [Desktop Entry]
 Name=Google Docs
-Exec=google-chrome-stable --app=https://docs.google.com/
+Exec=google-chrome-stable --app=https://docs.google.com/ --password-store=basic
 Icon=google-chrome
 Type=Application
 Categories=Office;WordProcessor;
@@ -112,7 +112,7 @@ EOF
 cat > /usr/share/applications/google-sheets.desktop <<'EOF'
 [Desktop Entry]
 Name=Google Sheets
-Exec=google-chrome-stable --app=https://sheets.google.com/
+Exec=google-chrome-stable --app=https://sheets.google.com/ --password-store=basic
 Icon=google-chrome
 Type=Application
 Categories=Office;Spreadsheet;
@@ -133,6 +133,16 @@ done
 chown -R "$KID_USER:$KID_USER" "$DESKTOP_DIR"
 echo "  Google Docs:   /usr/share/applications + $KID_USER Desktop"
 echo "  Google Sheets: /usr/share/applications + $KID_USER Desktop"
+
+# Suppress keyring prompt on passwordless auto-login accounts.
+# --password-store=basic tells Chrome not to use the system keyring.
+# Override the system Chrome .desktop for this user only (leaves admin unaffected).
+if [[ -f /usr/share/applications/google-chrome.desktop ]]; then
+    sed 's|Exec=/usr/bin/google-chrome-stable|Exec=/usr/bin/google-chrome-stable --password-store=basic|g' \
+        /usr/share/applications/google-chrome.desktop > "$LOCAL_APPS/google-chrome.desktop"
+    chown "$KID_USER:$KID_USER" "$LOCAL_APPS/google-chrome.desktop"
+    echo "  Chrome launcher: --password-store=basic applied for $KID_USER"
+fi
 
 # ── Auto-updates (system-wide, run once) ─────────────────────────────────────
 echo ""
