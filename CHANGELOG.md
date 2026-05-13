@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.1] - 2026-05-13
+
+### Fixed
+- **Override logic** — now overwrites any existing `.desktop` file that lacks `NoDisplay=true`, not just missing files. Fixes apps installed from `/etc/skel/` (e.g. `webapp-OnlineChat4519`) surviving the first run because the file already existed as a real app entry.
+- **webapp-OnlineChat4519** (Matrix) — added to `HIDE_ALWAYS`; was a Mint-shipped skel webapp that bypassed the idempotency check.
+
 ## [1.1.0] - 2026-05-13
 
 ### Changed

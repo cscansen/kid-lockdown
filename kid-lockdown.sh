@@ -82,6 +82,8 @@ HIDE_ALWAYS=(
     transmission-gtk
     # Browsers — Chrome is the controlled browser
     firefox
+    # Mint-shipped webapps (from /etc/skel — land in user's own .local/share/applications)
+    webapp-OnlineChat4519
 )
 
 case "$PROFILE" in
@@ -123,11 +125,11 @@ mkdir -p "$LOCAL_APPS"
 echo "Applying profile '$PROFILE' for '$KID_USER' (${#HIDE[@]} entries)..."
 for app in "${HIDE[@]}"; do
     target="$LOCAL_APPS/${app}.desktop"
-    if [[ ! -f "$target" ]]; then
+    if grep -qs 'NoDisplay=true' "$target" 2>/dev/null; then
+        echo "  already hidden: $app"
+    else
         printf '[Desktop Entry]\nNoDisplay=true\n' > "$target"
         echo "  hidden: $app"
-    else
-        echo "  already hidden: $app"
     fi
 done
 chown -R "$KID_USER:$KID_USER" "$LOCAL_APPS"
