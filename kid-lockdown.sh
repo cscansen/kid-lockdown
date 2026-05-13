@@ -24,14 +24,64 @@ HIDE_ALWAYS=(
     mintstick mintstick-format mintstick-format-kde mintstick-kde
     mintbackup mintsysadm mintreport mintreport-tray
     mintlocale mintlocale-im mintwelcome
-    cinnamon-settings-users cinnamon-settings-user
-    org.gnome.DiskUtility gnome-disk-image-mounter gnome-disk-image-writer
-    nm-connection-editor
-    # Office suite — replaced by Google Docs/Sheets in Chromium
+    # Office suite — replaced by Google Docs/Sheets in Chrome
     libreoffice-startcenter libreoffice-writer libreoffice-calc
     libreoffice-impress libreoffice-draw libreoffice-base libreoffice-math
     # Email
     thunderbird
+    # System settings — all panels hidden; kid uses taskbar for volume/wifi
+    cinnamon-settings
+    cinnamon-settings-users cinnamon-settings-user
+    cinnamon-settings-actions cinnamon-settings-applets
+    cinnamon-settings-backgrounds cinnamon-settings-calendar
+    cinnamon-settings-default cinnamon-settings-desklets
+    cinnamon-settings-desktop cinnamon-settings-effects
+    cinnamon-settings-extensions cinnamon-settings-fonts
+    cinnamon-settings-general cinnamon-settings-gestures
+    cinnamon-settings-hotcorner cinnamon-settings-keyboard
+    cinnamon-settings-mouse cinnamon-settings-nightlight
+    cinnamon-settings-notifications cinnamon-settings-panel
+    cinnamon-settings-power cinnamon-settings-privacy
+    cinnamon-settings-screensaver cinnamon-settings-sound
+    cinnamon-settings-startup cinnamon-settings-themes
+    cinnamon-settings-thunderbolt cinnamon-settings-universal-access
+    cinnamon-settings-windows cinnamon-settings-workspaces
+    cinnamon-color-panel cinnamon-display-panel
+    cinnamon-network-panel cinnamon-onscreen-keyboard
+    cinnamon-wacom-panel
+    # Disk / network / storage admin
+    org.gnome.DiskUtility gnome-disk-image-mounter gnome-disk-image-writer
+    org.gnome.baobab org.gnome.FileRoller
+    nm-connection-editor
+    org.x.Warpinator
+    # Dangerous admin tools
+    lightdm-settings
+    gufw
+    gnome-online-accounts-gtk
+    fingwit
+    webapp-manager
+    # Text editors (kid has no business editing system files)
+    org.x.editor
+    vim
+    # System monitors / diagnostics
+    org.gnome.SystemMonitor gnome-system-monitor-kde
+    org.gnome.PowerStats
+    org.gnome.seahorse.Application
+    # Bluetooth management
+    blueman-adapters blueman-manager
+    # Misc tools a 6-year-old doesn't need
+    bulky
+    gucharmap
+    mate-color-select
+    onboard
+    org.freedesktop.IBus.Setup
+    org.gnome.font-viewer
+    simple-scan
+    system-config-printer
+    thingy
+    transmission-gtk
+    # Browsers — Chrome is the controlled browser
+    firefox
 )
 
 case "$PROFILE" in
