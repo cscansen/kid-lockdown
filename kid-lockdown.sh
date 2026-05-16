@@ -151,16 +151,6 @@ fi
 echo ""
 echo "Creating Google Docs and Sheets launchers..."
 
-cat > /usr/share/applications/makecode-microbit.desktop <<'EOF'
-[Desktop Entry]
-Name=MakeCode
-Exec=google-chrome-stable --app=https://makecode.microbit.org/ --password-store=basic
-Icon=google-chrome
-Type=Application
-Categories=Education;
-StartupNotify=true
-EOF
-
 cat > /usr/share/applications/google-docs.desktop <<'EOF'
 [Desktop Entry]
 Name=Google Docs
@@ -184,20 +174,17 @@ EOF
 DESKTOP_DIR="$KID_HOME/Desktop"
 mkdir -p "$DESKTOP_DIR"
 
-cp /usr/share/applications/makecode-microbit.desktop "$DESKTOP_DIR/makecode-microbit.desktop"
 cp /usr/share/applications/google-docs.desktop   "$DESKTOP_DIR/google-docs.desktop"
 cp /usr/share/applications/google-sheets.desktop "$DESKTOP_DIR/google-sheets.desktop"
 
-for f in "$DESKTOP_DIR/makecode-microbit.desktop" "$DESKTOP_DIR/google-docs.desktop" "$DESKTOP_DIR/google-sheets.desktop"; do
+for f in "$DESKTOP_DIR/google-docs.desktop" "$DESKTOP_DIR/google-sheets.desktop"; do
     chmod +x "$f"
     gio set -t string "$f" metadata::trusted "yes" 2>/dev/null || true
 done
 
 chown "$KID_USER:$KID_USER" \
-    "$DESKTOP_DIR/makecode-microbit.desktop" \
     "$DESKTOP_DIR/google-docs.desktop" \
     "$DESKTOP_DIR/google-sheets.desktop"
-echo "  MakeCode:      /usr/share/applications + $KID_USER Desktop"
 echo "  Google Docs:   /usr/share/applications + $KID_USER Desktop"
 echo "  Google Sheets: /usr/share/applications + $KID_USER Desktop"
 
